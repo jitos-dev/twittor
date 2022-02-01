@@ -1,7 +1,23 @@
+//para la url de la página si estamos en localhost o en producción (en el servidor)
+var url = window.location.href; //con esto obtenemos la url completa de donde estamos
+
+/**
+ * La url del service worker si estamos en el servidor de github es para el ejemplo en
+ * el que estamos https://jitos86.github.io/twittor/. Para obtener la url donde se encuentra 
+ * el servide worker tenemos que copiar apartir de .io.
+ */
+var swLocation = "/twittor/sw.js";
+
 
 //instalamos el sw
 if (navigator.serviceWorker) {
-    navigator.serviceWorker.register('/sw.js');
+
+    //comprobamos que estamos en el localhost o si no utilizamos la del servidor
+    if (url.includes('localhost')) {
+        swLocation = '/sw.js';
+    }
+
+    navigator.serviceWorker.register(swLocation);
 }
 
 
